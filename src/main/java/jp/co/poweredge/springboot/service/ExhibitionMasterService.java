@@ -1,7 +1,22 @@
 package jp.co.poweredge.springboot.service;
 
-public interface ExhibitionMasterService {
+import java.util.List;
 
-	//public Exhibition getAllExhibition();
+import org.springframework.stereotype.Service;
+
+import jp.co.poweredge.springboot.dao.factory.DAOFactory;
+import jp.co.poweredge.springboot.dao.impl.ExhibitionMasterDAOImpl;
+import jp.co.poweredge.springboot.model.ExhibitionMaster;
+
+@Service
+public class ExhibitionMasterService {
+
+	DAOFactory jdbcDaoFactory = DAOFactory.getDAOJDBCFactory();
+	ExhibitionMasterDAOImpl exhibitionMasterDAOImpl = (ExhibitionMasterDAOImpl) jdbcDaoFactory.getExhibitionMasterDAO();
+
+	public List<ExhibitionMaster> getAllExhibition() {
+		List<ExhibitionMaster> exhibitionMasterList =  exhibitionMasterDAOImpl.findAllExhibition();
+		return exhibitionMasterList;
+	}
 
 }
